@@ -1,0 +1,78 @@
+{% extends "jobs/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+    .profile-images{
+        background-image: url("{{username.profile.cover_picture.url}}");
+        background-size: cover;
+        height:250px;
+       
+    }
+   
+</style>
+
+<div class="profile-images">
+    <img class= "rounded-circle account-img"src="{{username.profile.profile_picture.url}}" widht=300 height="250">
+    
+</div>
+
+<div class ="row">
+<div class= "col-md-4" >
+<div class="content-section">
+    
+    <h2>{{user_model}}</h2>
+    <ul class="list-group-flush">
+        <li class="list-group-item">{{user_model.email}}</li>
+        <li class="list-group-item">{{user_model.profile.about_me}}</li>
+        <li class = "list-group-item">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                   
+                    {{ u_form|crispy }}
+                    
+                    
+                </fieldset>
+                <div class="form-group mt-2">
+                    <button class="btn btn-outline-info" type="submit">Update</button>
+                </div>
+            </form>
+        </li>
+    </ul>
+</div>
+    
+</div>
+
+<div class="col-md-8 ps-5">
+    <h1> Jobs listed by {{username}}</h1>
+    {% for job in jobs %}
+
+   <div class="container-fluid  mt-4">
+    <div class="h-100 p-5 bg-dark text-white border rounded-3 mt-5">
+        
+        <h2>{{job.title}}</h2>
+        <a class="text-decoration-none" href="#">{{job.username}}</a>
+        <br>
+        <small class="text-muted">  ${{job.payment}}</small>
+        <p class="mt-2">{{job.description}}</p>
+        <a class="btn btn-outline-secondary"  href= "#" role="button">Modify</a>
+      </div>
+   </div>
+
+    {%endfor %}
+    
+    
+
+</div>
+
+</div>
+
+
+ 
+    
+
+
+
+{% endblock content%}
