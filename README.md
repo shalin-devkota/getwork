@@ -1,6 +1,6 @@
 # GetWork
 
-##STILL BEING DEVELOPED.
+## STILL BEING DEVELOPED.
 
 ## Installation
 
